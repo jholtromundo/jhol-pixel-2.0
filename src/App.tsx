@@ -101,9 +101,7 @@ function App() {
   const activeProject = state.activeProjectId ? state.projects[state.activeProjectId] : null;
 
   useEffect(() => {
-    // FIX: Changed import.meta.env.VITE_API_KEY to process.env.API_KEY to match Gemini guidelines and fix TypeScript error.
     if (!process.env.API_KEY || !activeProject) return;
-    // FIX: Changed import.meta.env.VITE_API_KEY to process.env.API_KEY to match Gemini guidelines and fix TypeScript error.
     const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
     chatRef.current = ai.chats.create({
       model: 'gemini-2.5-flash',
@@ -379,7 +377,7 @@ function App() {
           step: 3,
       });
   };
-
+  
   const handleGenerateAllPrompts = async () => {
     if (!activeProject) return;
     const scenesToGenerate = activeProject.segmentedScenes.filter(scene => !activeProject.promptHistory[scene] || activeProject.promptHistory[scene].length === 0);
@@ -464,7 +462,6 @@ function App() {
     showToast(isKeyScene ? "Removido das Cenas Chave." : "Salvo como Cena Chave!");
   };
 
-  // (All other original handlers like handleGenerateVariations, handleRefinePrompt, etc., are assumed to be here and remain unchanged unless specified)
   const renderStep = () => {
     if (!activeProject) {
         return <div className="text-center p-8">Nenhum projeto ativo. Crie ou carregue um projeto para começar.</div>
